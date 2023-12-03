@@ -1,6 +1,5 @@
 import "./globals.css";
 import { Nunito } from "next/font/google";
-import next from "@/node_modules/next/index";
 import type { Metadata } from "next";
 import Navbar from "./components/navbar/Navbar";
 import ClientOnly from "./components/ClientOnly";
@@ -10,7 +9,6 @@ import LoginModal from "./components/modals/LoginModal";
 import getCurrentUser from "./actions/getCurrentUser";
 import RentModal from "./components/modals/RentModal";
 import SearchModal from "./components/modals/SearchModal";
-import ResetModal from "./components/modals/ResetModal";
 export const metadata: Metadata = {
   title: "Airbnb",
   description: "Real Estate Application",
@@ -33,7 +31,6 @@ export default async function RootLayout({
           <ToasterProvider />
           <SearchModal />
           <RentModal />
-          <ResetModal />
           <LoginModal />
           <RegisterModal />
           <Navbar currentUser={currentUser} />
