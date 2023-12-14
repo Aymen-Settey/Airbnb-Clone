@@ -19,13 +19,27 @@ model User {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
   favoriteIds     String[] @db.ObjectId
+  resetToken      String? 
+  resetTokenExpiry DateTime? 
+  active         Boolean         @default(false) // New
+  activateTokens ActivateToken[]
+
   
 
   accounts Account[]
   listings Listing[]
   reservations Reservation[]
+  
 }
-
+model ActivateToken {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  token       String    @unique
+  createdAt   DateTime  @default(now())
+  activatedAt DateTime?
+  userId      String @db.ObjectId
+  user   User @relation(fields: [userId], references: [id])
+  
+}
 model Account {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   userId             String   @db.ObjectId

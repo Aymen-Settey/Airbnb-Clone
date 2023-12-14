@@ -23,7 +23,3 @@ export type SafeUser = Omit<
   updatedAt: string;
   emailVerified: string | null;
 };
-
-export type ForgotPasswordPayload = {
-  email: string;
-};

@@ -15,10 +15,12 @@ import { toast } from "react-hot-toast";
 import Button from "../Button";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import { useRouter } from "next/navigation";
+import useResetPasswordModal from "@/app/hooks/useResetPasswordModal";
 
 const LoginModal = () => {
   const router = useRouter();
   const registerModal = useRegisterModal();
+  const resetModal = useResetPasswordModal();
   const loginModal = useLoginModal();
   const [isLoading, setIsLoading] = useState(false);
   const {
@@ -54,6 +56,10 @@ const LoginModal = () => {
     loginModal.onClose();
     registerModal.onOpen();
   }, [loginModal, registerModal]);
+  const togglee = useCallback(() => {
+    loginModal.onClose();
+    resetModal.onOpen();
+  }, [loginModal, resetModal]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
@@ -103,6 +109,15 @@ const LoginModal = () => {
             className="text-neutral-800 cursor-pointer hover:underline"
           >
             Create an account
+          </div>
+        </div>
+        <div className="justify-center flex flex-row items-center gap-2">
+          <div className="">Forgot your Password ?</div>
+          <div
+            onClick={togglee}
+            className="text-neutral-800 cursor-pointer hover:underline"
+          >
+            Click here !
           </div>
         </div>
       </div>

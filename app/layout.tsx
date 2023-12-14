@@ -9,6 +9,10 @@ import LoginModal from "./components/modals/LoginModal";
 import getCurrentUser from "./actions/getCurrentUser";
 import RentModal from "./components/modals/RentModal";
 import SearchModal from "./components/modals/SearchModal";
+import ResetModal from "./components/modals/ResetModal";
+import { getServerSession } from "next-auth";
+import SessionProvider from "./Providers/SessionProvider";
+import Provider from "./Providers/SessionProvider";
 export const metadata: Metadata = {
   title: "Airbnb",
   description: "Real Estate Application",
@@ -26,17 +30,21 @@ export default async function RootLayout({
   const currentUser = await getCurrentUser();
   return (
     <html lang="en">
-      <body className={font.className}>
-        <ClientOnly>
-          <ToasterProvider />
-          <SearchModal />
-          <RentModal />
-          <LoginModal />
-          <RegisterModal />
-          <Navbar currentUser={currentUser} />
-        </ClientOnly>
-        <div className="pb-20 pt-28">{children}</div>
-      </body>
+      <Provider>
+        <body className={font.className}>
+          <ClientOnly>
+            <ToasterProvider />
+            <SearchModal />
+            <RentModal />
+            <ResetModal />
+            <LoginModal />
+            <RegisterModal />
+            <Navbar currentUser={currentUser} />
+          </ClientOnly>
+
+          <div className="pb-20 pt-28">{children}</div>
+        </body>
+      </Provider>
     </html>
   );
 }
