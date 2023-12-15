@@ -6,6 +6,7 @@ import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 
 import prisma from "@/app/libs/prismadb";
+import { toast } from "react-hot-toast";
 
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -37,6 +38,9 @@ export const authOptions: AuthOptions = {
 
         if (!user || !user?.hashedPassword) {
           throw new Error("Invalid credentials");
+        }
+        if (!user.active) {
+          throw new Error("User is not active");
         }
 
         const isCorrectPassword = await bcrypt.compare(

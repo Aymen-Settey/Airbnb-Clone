@@ -3,23 +3,16 @@ import React, { useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import axios from "axios";
-import Heading from "../../components/Heading";
-import Modal from "../../components/modals/Modal";
-import Input from "../../components/inputs/Input";
 import { SessionProvider, useSession } from "next-auth/react";
 import { IoMdClose } from "react-icons/io";
-import Button from "@/app/components/Button";
-import { getSession } from "@/app/actions/getCurrentUser";
 import Loader from "@/app/components/Loader";
 
 interface User {
   email: string;
-  // other properties of your user type
 }
 
 const ResetPassword = ({ params }: any) => {
-  console.log(params.token);
+  //console.log(params.token);
   const router = useRouter();
 
   const [error, setError] = useState("");
@@ -151,30 +144,6 @@ const ResetPassword = ({ params }: any) => {
           </div>
         </div>
       </>
-
-      // <div className="flex min-h-screen flex-col items-center justify-between p-24">
-      //   <div className="bg-[#212121] p-8 rounded shadow-md w-96">
-      //     <h1 className="text-4xl text-center font-semibold mb-8 text-white">
-      //       Reset Password
-      //     </h1>
-      //     <form onSubmit={handleSubmitHookForm(onSubmit)}>
-      //       <input
-      //         type="password"
-      //         {...register("password", { required: true })}
-      //         className="w-full border border-gray-300 text-black rounded px-3 py-2 mb-4 focus:outline-none focus:border-blue-400 focus:text-black"
-      //         placeholder="Password"
-      //       />
-
-      //       <button
-      //         type="submit"
-      //         className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
-      //       >
-      //         Reset Password
-      //       </button>
-      //       <p className="text-red-600 text-[16px] mb-4">{error && error}</p>
-      //     </form>
-      //   </div>
-      // </div>
     )
   );
 };

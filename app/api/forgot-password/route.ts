@@ -34,13 +34,13 @@ export const POST = async (request: any) => {
     const resetUrl = `localhost:3000/reset-password/${resetToken}`;
     const body = `Reset your password by visiting this URL: ${resetUrl}`;
 
-    sgMail.setApiKey(process.env.SENDGRID_API_KEY || "");
+    sgMail.setApiKey(process.env.SENDGRID_SECOND_API_KEY || "");
     sgMail.send({
       to: email,
       from: "messisettey@gmail.com",
       subject: "Reset Password",
       text: body,
-    }).then;
+    });
 
     return new NextResponse("Reset password email sent", { status: 200 });
   } catch (error: any) {
